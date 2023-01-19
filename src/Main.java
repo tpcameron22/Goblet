@@ -3,12 +3,28 @@ import java.util.Stack;
 
 public class Main {
 
-    //for keeping track of turn moves and what player it is
+    public static void main(String[] args) {
+        //prepare scanner
+        Scanner scan = new Scanner(System.in);
+        //choose game
+        System.out.println("Type the number of the game you wish to play \n 1. GOBLET");
+        int choice = scan.nextInt();
+        if(choice == 1){
+            runGoblet();
+        }else{
+            System.out.println("GOBLET is the only game at the moment, please rerun the program");
+        }
+    }
+
+
+//GOBLET
+    //for keeping track of turn moves and what player it is for
     public static int count = 0;
     public static boolean singleMove = true;
     public static boolean game = true;
 
-    public static void main(String[] args) {
+
+    public static void runGoblet(){
 
         //make board class object.
         Board BoardObj = new Board();
@@ -52,7 +68,11 @@ public class Main {
 
             //ask for move
             while (singleMove) {
-                System.out.println("\n" +"Type place to place a new piece or move to move an existing piece");
+                if(count > 2) {
+                    System.out.println("\n" + "Type place to place a new piece");
+                }else{
+                    System.out.println("\n" + "Type place to place a new piece or move to move an existing piece");
+                }
                 String ask = scan.next();
                 if(ask.equals("place")) {
                     System.out.println("\n" + "enter move in the form of int(X) int(Y) int(Piece Size) to place a new coordinate. For Example: 123");
@@ -93,4 +113,5 @@ public class Main {
 
 /*
 current errors: NONE
+todo create more games beside goblet and an interface to chose what game.
  */
