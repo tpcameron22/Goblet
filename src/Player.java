@@ -1,31 +1,17 @@
 import java.util.Stack;
 public class Player extends Main {
 
-    //make two sets of pieces. this is required because if I assign both to one function, the edits of one will affect the other.
-    Stack<Piece>[] pieces = new Stack[3];
-    Stack<Piece>[] pieces2 = new Stack[3];
 
-    public Stack<Piece>[] makePieces() {
-        for (int i = 0; i < 3; i++) {
-            pieces[i] = new Stack<>();
-            pieces[i].push(new Piece(PlayerNumber.ONE, 1));
-            pieces[i].push(new Piece(PlayerNumber.ONE, 2));
-            pieces[i].push(new Piece(PlayerNumber.ONE, 3));
-            pieces[i].push(new Piece(PlayerNumber.ONE, 4));
-
-        }
-        return pieces;
-    }
-    public Stack<Piece>[] makePieces2() {
-        for (int i = 0; i < 3; i++) {
-            pieces2[i] = new Stack<>();
-            pieces2[i].push(new Piece(PlayerNumber.TWO, 1));
-            pieces2[i].push(new Piece(PlayerNumber.TWO, 2));
-            pieces2[i].push(new Piece(PlayerNumber.TWO, 3));
-            pieces2[i].push(new Piece(PlayerNumber.TWO, 4));
-
-        }
-        return pieces2;
+    public Stack<Piece>[] makePieces(PlayerNumber player) {
+            Stack<Piece>[] pieces = new Stack[3];
+            for (int i = 0; i < 3; i++) {
+                pieces[i] = new Stack<>();
+                pieces[i].push(new Piece(player, 1));
+                pieces[i].push(new Piece(player, 2));
+                pieces[i].push(new Piece(player, 3));
+                pieces[i].push(new Piece(player, 4));
+            }
+            return pieces;
     }
 
     //checks to see if the player has the given piece. inverted because it's quicker. It'll stop after finding it.

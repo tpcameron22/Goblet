@@ -7,9 +7,9 @@ public class Board extends Main{
     public static final String RESET = "\033[0m";  // Text Reset
 
     //make board
-    public Stack<Piece>[][] GameBoard = new Stack[4][4];
+    public Stack<Piece>[][] GobGameBoard = new Stack[4][4];
 
-    public Stack<Piece>[][] FillBoard() {
+    public Stack<Piece>[][] FillGobletBoard() {
         //fill board with squares
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -17,13 +17,13 @@ public class Board extends Main{
                 Stack<Piece> Square = new Stack<>();
                 Square.push(new Piece(PlayerNumber.EMPTY, 0));
                 //put square on board
-                GameBoard[i][j] = Square;
+                GobGameBoard[i][j] = Square;
             }
         }
-        return GameBoard;
+        return GobGameBoard;
     }
-//Integer.parseInt(Integer.toString(Board[i][j].peek()).substring(0, 1))
-    public String toString(Stack<Piece>[][] board){
+
+    public String GobtoString(Stack<Piece>[][] board){
 
         //create string
         StringBuilder FString = new StringBuilder();
@@ -53,7 +53,59 @@ public class Board extends Main{
         }
         return FString.toString();
     }
+
+
+    //checkers
+    public Piece[][] CheckersBoard = new Piece[8][8];
+    public Piece[][] FillCheckersBoard(){
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++) {
+                    if (i < 3 && (i + j) % 2 == 0) {
+                        CheckersBoard[i][j] = new Piece(PlayerNumber.ONE, 0);
+                    }
+                    else if ((i + j) % 2 == 0 && i > 4) {
+                        CheckersBoard[i][j] = new Piece(PlayerNumber.TWO, 0);
+                    }
+                    else{
+                        CheckersBoard[i][j] = new Piece(PlayerNumber.EMPTY, 0);
+                    }
+            }
+        }
+        return CheckersBoard;
+    }
+
+
+    //makes checkers board with no pieces on it. just black and white and the player value
+    public String ChecktoString(Piece[][] board){
+        //create string
+        StringBuilder FString = new StringBuilder();
+        FString.append("\n    Checkers    \n   1   2   3   4   5   6   7   8\n");
+
+        for(int i = 0; i <  8; i++) {
+            FString.append(i+1).append("| ");
+            for (int j = 0; j < 8; j++) {
+                //change color
+                if(board[i][j].player == PlayerNumber.TWO){
+                    FString.append(BLACK);
+                } else if(board[i][j].player == PlayerNumber.ONE){
+                    FString.append(WHITE_BOLD);
+                }
+                //else turn white
+                else{
+                    FString.append(WHITE);
+                }
+                //print number
+                FString.append(board[i][j].value);
+                //reset color for each number
+                FString.append(RESET + " | ");
+            }
+            FString.append("\n  ---+---+---+---+---+---+---+---+\n");
+        }
+        return FString.toString();
+    }
 }
+
+
 
 
 
